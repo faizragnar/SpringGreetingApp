@@ -1,6 +1,5 @@
 package org.example.greetingspring;
-
-
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Service;
 
@@ -25,9 +24,12 @@ public class GreetingService {
         return greeting.orElse(new Greeting("Greeting not found!"));
     }
 
-
-
-
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
+    }
 
 
 }
+
+
+
