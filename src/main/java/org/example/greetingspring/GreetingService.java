@@ -20,4 +20,14 @@ public class GreetingService {
         return greetingRepository.save(greeting);
     }
 
+    public Greeting getGreetingById(Long id) {
+        Optional<Greeting> greeting = greetingRepository.findById(id);
+        return greeting.orElse(new Greeting("Greeting not found!"));
+    }
+
+
+
+
+
+
 }
