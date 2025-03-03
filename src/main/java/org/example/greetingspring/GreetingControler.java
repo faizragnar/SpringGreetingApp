@@ -1,6 +1,9 @@
 package org.example.greetingspring;
 
 import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+
 @RestController
 @RequestMapping("/greet")
 public class GreetingControler{
@@ -11,30 +14,29 @@ public class GreetingControler{
         this.greetingService = greetingService;
     }
 
-    @GetMapping
-    public Greeting getGreeting(
-            @RequestParam(value = "firstName", required = false) String firstName,
-            @RequestParam(value = "lastName", required = false) String lastName) {
-        return greetingService.getGreet(firstName, lastName);
+    @PostMapping("/save")
+    public Greeting saveGreeting(@RequestBody Greeting greeting) {
+        return greetingService.saveGreeting(greeting);
     }
 
-    @PostMapping("/post")
-    public Greeting postGreeting(@RequestBody Greeting greeting) {
-        return greetingService.postGreet(greeting);
+    @GetMapping("/{id}")
+    public Greeting getGreetingById(@PathVariable Long id) {
+        return greetingService.getGreetingById(id);
     }
 
-    @PutMapping("/update/{firstName}")
-    public Greeting putGreeting(@PathVariable String firstName, @RequestBody Greeting greeting) {
-        return greetingService.updateGreet(firstName, greeting);
+    @GetMapping("/all")
+    public List<Greeting> getAllGreetings() {
+        return greetingService.getAllGreetings();
     }
 
-    @DeleteMapping("/remove/{firstName}")
-    public Greeting deleteGreeting(@PathVariable String firstName) {
-        return greetingService.deleteGreet(firstName);
+    @PutMapping("/update/{id}")
+    public Greeting updateGreeting(@PathVariable Long id, @RequestBody Greeting greeting) {
+        return greetingService.updateGreeting(id, greeting);
     }
 
-
-
+    @DeleteMapping("/delete/{id}")
+    public String deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteGreeting(id);
+        return "Greeting deleted successfully!";
+    }
 }
-
-
