@@ -13,9 +13,9 @@ public class GreetingControler{
     public GreetingControler(GreetingService greetingService) {
         this.greetingService = greetingService;
     }
-    @GetMapping("/{name}")
+    @GetMapping("/hello/{name}")
     public Greeting getGreet(@PathVariable String name){
-        return new Greeting("Hello, "+name+"!");
+        return new Greeting("Hello, " + name + "!");
     }
     @PostMapping("/post")
     public Greeting postGreeting(@RequestBody Greeting greeting) {
