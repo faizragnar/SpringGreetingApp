@@ -6,17 +6,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
+
 @Service
 public class AuthenticationService {
 
-    @Autowired
-    AuthUserRepository authUserRepository;
-
-
-    PasswordEncoder passwordEncoder;
+    private final AuthUserRepository authUserRepository;
+    private final EmailService emailService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthenticationService(PasswordEncoder passwordEncoder) {
+    public AuthenticationService(AuthUserRepository authUserRepository, EmailService emailService, PasswordEncoder passwordEncoder) {
+        this.authUserRepository = authUserRepository;
+        this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -25,9 +26,7 @@ public class AuthenticationService {
     }
 
     public String registerUser(AuthUserDTO authUserDTO) {
-        if (authUserRepository.findByEmail(authUserDTO.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already registered!");
-        }
+
 
         AuthUser newUser = new AuthUser();
         newUser.setFirstName(authUserDTO.getFirstName());
@@ -36,8 +35,16 @@ public class AuthenticationService {
         newUser.setPassword(passwordEncoder.encode(authUserDTO.getPassword()));
 
         authUserRepository.save(newUser);
+
+        if (emailService != null) {
+            emailService.sendEmail(authUserDTO.getEmail(), "Welcome to Greeting App!", "Thank you for registering!");
+        } else {
+            throw new RuntimeException("Email service is not initialized properly.");
+        }
+
         return "User registered successfully!";
     }
+
 
     public String loginUser(LoginDTO loginDTO) {
         Optional<AuthUser> user = authUserRepository.findByEmail(loginDTO.getEmail());
@@ -47,3 +54,4 @@ public class AuthenticationService {
         throw new RuntimeException("Invalid credentials");
     }
 }
+
