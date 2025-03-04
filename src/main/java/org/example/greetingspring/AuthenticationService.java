@@ -26,7 +26,9 @@ public class AuthenticationService {
     }
 
     public String registerUser(AuthUserDTO authUserDTO) {
-
+        if (authUserRepository.findByEmail(authUserDTO.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already registered!");
+        }
 
         AuthUser newUser = new AuthUser();
         newUser.setFirstName(authUserDTO.getFirstName());
