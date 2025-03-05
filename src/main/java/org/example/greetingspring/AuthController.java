@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -12,7 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class AuthController {
 
     @Autowired
-    private AuthenticationService authenticationService;
+    AuthenticationService authenticationService;
 
     @PostMapping("/register")
     @Operation(summary = "Register a new user", description = "Registers a user and sends a welcome email")
@@ -22,9 +23,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    @Operation(summary = "Login user", description = "Authenticates a user and returns a success message")
-
-    public String loginUser(@Valid @RequestBody LoginDTO loginDTO) {
+    public Map<String, String> loginUser(@Valid @RequestBody LoginDTO loginDTO) {
         return authenticationService.loginUser(loginDTO);
     }
 }
