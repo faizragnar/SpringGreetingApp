@@ -1,5 +1,6 @@
-package org.example.greetingspring;
+package org.example.greetingspring.repository;
 
+import org.example.greetingspring.model.AuthUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;

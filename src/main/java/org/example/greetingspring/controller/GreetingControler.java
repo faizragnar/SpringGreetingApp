@@ -1,5 +1,7 @@
-package org.example.greetingspring;
+package org.example.greetingspring.controller;
 
+import org.example.greetingspring.model.Greeting;
+import org.example.greetingspring.service.GreetingService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;

@@ -1,5 +1,6 @@
-package org.example.greetingspring;
-import org.springframework.web.bind.annotation.*;
+package org.example.greetingspring.service;
+import org.example.greetingspring.repository.GreetingRepository;
+import org.example.greetingspring.model.Greeting;
 
 import org.springframework.stereotype.Service;
 

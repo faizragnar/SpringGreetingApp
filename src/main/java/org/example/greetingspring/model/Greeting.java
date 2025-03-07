@@ -1,4 +1,4 @@
-package org.example.greetingspring;
+package org.example.greetingspring.model;
 
 import jakarta.persistence.*;
 
@@ -17,7 +17,7 @@ public class Greeting {
 
     public Greeting(String message) {
         this.message = message;
-        this.id = id;
+
     }
 
     public String getMessage() {

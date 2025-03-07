@@ -1,4 +1,4 @@
-package org.example.greetingspring;
+package org.example.greetingspring.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

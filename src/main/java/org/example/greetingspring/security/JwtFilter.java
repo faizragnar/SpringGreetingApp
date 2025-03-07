@@ -1,4 +1,4 @@
-package org.example.greetingspring;
+package org.example.greetingspring.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
