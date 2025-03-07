@@ -5,6 +5,7 @@ import org.example.greetingspring.dto.LoginDTO;
 import org.example.greetingspring.model.AuthUser;
 import org.example.greetingspring.repository.AuthUserRepository;
 import org.example.greetingspring.security.JwtUtil;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationService implements AuthenticationServiceInterface {
 
     private final AuthUserRepository authUserRepository;
     private final EmailService emailService;
